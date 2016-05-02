@@ -2,7 +2,7 @@
   <name>Data Barang</name>
   <description>Aplikasi data barang</description>
   <author href="http://naskah-kuno.org" email="xhabibmustofax@gmail.com">Habib Mustofa</author>
-  <content src="Data Barang/www/index.html"/>
+  <content src="index.html"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="android-minSdkVersion" value="14"/>
   <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1"/>
