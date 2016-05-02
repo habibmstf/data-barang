@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+        $("#insert").click(function(){
+            var nama=$("#nama").val();
+            var deskripsi=$("#deskripsi").val();
+            var harga=$("#harga").val();
+            var dataString="nama="+nama+"&deskripsi="+deskripsi+"&harga="+harga+"&insert=";
+            if($.trim(nama).length>0 & $.trim(deskripsi).length>0 & $.trim(harga).length>0)
+            {
+                $.ajax({
+                    type: "POST",
+                    url:"http://naskah-kuno.org/phonegap/insert.php",
+                    data: dataString,
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function(){ $("#insert").val('Connecting...');},
+                    success: function(data){
+                        if(data=="ok")
+                        {
+                            alert("inserted");
+                            $("#insert").val('Insert');
+                        }
+                        else if(data=="error")
+                        {
+                            alert("error");
+                             $("#insert").val('Insert');
+                        }
+                    }
+                });
+            }return false;
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a class="button button-clear" href="home.html">Home</a>
+        <h1 class="title">Tambah Barang</h1>
+    </div><br/><br/>
+    <div class="list">
+        <input type="hidden" id="id" value=""/>
+        <label class="item item-input">
+            <input type="text" id="nama" value="" placeholder="Nama" />
+        </label>
+
+        <label class="item item-input">
+            <input type="text" id="deskripsi" value="" placeholder="Deskripsi" />
+        </label>
+            
+        <label class="item item-input">
+            <input type="number" id="harga" value="" placeholder="Harga (Rp)" />
+        </label>
+        <div class="item">
+            <input type="button" id="insert" class="button button-block button-balanced" value="Insert"/>
+        </div>
+    </div>
+</body>
+</html>
