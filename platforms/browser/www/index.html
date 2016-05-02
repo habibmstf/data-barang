@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+    	$("#login").click(function(){
+			var username=$("#username").val();
+			var password=$("#password").val();
+			var dataString="username="+username+"&password="+password+"&login=";
+			if($.trim(username).length>0 & $.trim(password).length>0)
+			{
+				$.ajax({
+					type: "POST",
+					url: "http://naskah-kuno.org/phonegap/login.php",
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+					beforeSend: function(){ $("#login").html('Connecting...');},
+					success: function(data){
+						if(data=="success")
+						{
+							localStorage.login="true";
+							localStorage.username=username;
+							window.location.href = "home.html";
+						}
+						else if(data="failed")
+						{
+							alert("Login error");
+							$("#login").html('Login');
+						}
+					}
+				});
+			}return false;
+		});
+    });
+    </script>
+
+</head>
+<body>
+	<div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <h1 class="title">Login</h1>
+    </div><br><br>
+    <div class="list">
+    	<label class="item item-input">
+		    <input id="username" type="text" placeholder="Username" />
+		</label>
+		<label class="item item-input">
+			<input id="password" type="password" placeholder="password" />
+		</label>
+	    <div class="item">
+	            <input type="button" id="login" class="button button-block button-balanced" value="Login"/>
+	    </div>
+    </div>
+</body>
+</html>
+

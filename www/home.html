@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/ionic.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function()
+    {
+
+        var url="http://naskah-kuno.org/phonegap/json.php";
+        $.getJSON(url,function(result){
+            console.log(result);
+            $.each(result, function(i, field){
+                var id=field.id;
+                var nama=field.nama;
+                var deskripsi=field.deskripsi;
+                var harga=field.harga;
+                $("#listview").append("<a class='item' href='form.html?id="+id+"&nama="+nama+"&deskripsi="+deskripsi+"&harga="+harga+"'><span class='item-note'>Rp "+harga+"</span><h2>"+ nama + " </h2><p>"+ deskripsi +"</p></a>");
+            });
+        });
+    });
+    </script>
+    
+</head>
+<body>
+    <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+        <a href="insert.html" class="button button-clear">Tambah</a>
+        <h1 class="title">Home</h1>
+        <a id="logout" class="button button-clear" href="#" onclick="showConfirm()">Logout</a>
+    </div><br/><br/>
+    <div class="card">
+        <ul id="listview">
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+         $("#logout").click(function(){
+             localStorage.login="false";
+             window.location.href = "index.html";
+         });
+    </script>
+</body>
+</html>
+
